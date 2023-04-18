@@ -17,6 +17,10 @@ class Player
         $this->user_id = $user_id;
     }
 
+    /**
+     * Calculate score for player
+     * @return void
+     */
     public final function calculateScore(): void
     {
         //add 1 score for each dice has value 6 from last roll and remove it from last roll
@@ -28,7 +32,11 @@ class Player
         });
     }
 
-    //get number of dice has value 1 from last roll
+
+    /**
+     * Get number of dice has value 1 from last roll
+     * @return int
+     */
     public final function numberOfDiceHasValue1FromLastRoll(): int
     {
         return count(array_filter($this->last_roll, function ($dice) {
@@ -36,7 +44,11 @@ class Player
         }));
     }
 
-    //remove dices has value 1 from last roll
+
+    /**
+     * Remove dices has value 1 from last roll
+     * @return void
+     */
     public final function removeDiceHasValue1FromLastRoll(): void
     {
         $this->last_roll = array_filter($this->last_roll, function ($dice) {
@@ -44,7 +56,11 @@ class Player
         });
     }
 
-    //add number of dice has value 1 to last roll
+    /**
+     * Add number of dice has value 1 to last roll
+     * @param int $number_of_dice
+     * @return void
+     */
     public final function addNumberOfDiceHasValue1ToLastRoll(int $number_of_dice): void
     {
         for ($i = 0; $i < $number_of_dice; $i++) {
@@ -52,18 +68,28 @@ class Player
         }
     }
 
+    /**
+     * Check player can play or not by number of dice in last roll
+     * @return bool
+     */
     public final function canPlay(): bool
     {
         return $this->numberOfDiceInLastRoll() > 0;
     }
 
-    //check player can play or not by number of dice in last roll
-
+    /**
+     * Get number of dice in last roll
+     * @return int
+     */
     public final function numberOfDiceInLastRoll(): int
     {
         return count($this->last_roll) ?? 0;
     }
 
+    /**
+     * Roll dice
+     * @return void
+     */
     public final function roll(): void
     {
         $numberOfDice = $this->numberOfDiceInLastRoll();
@@ -101,10 +127,14 @@ class RollDiceGame
         $this->show_log = $show_log;
     }
 
+    /**
+     * Play game
+     * @return void
+     */
     public final function play(): void
     {
         echo "Game started...\n";
-        //check game is over or not
+        //check game is over or not 
         if ($this->isGameOver()) {
             $this->showResult();
             return;
@@ -120,12 +150,19 @@ class RollDiceGame
         $this->showResult();
     }
 
-    //check game is over or not
+    /**
+     * Check game is over or not
+     * @return bool
+     */
     public final function isGameOver(): bool
     {
         return count($this->players) <= 1;
     }
 
+    /**
+     * Show result of game
+     * @return void
+     */
     public final function showResult(): void
     {
         echo "\n>>>>>>>>>>>>Game over<<<<<<<<<<<<<\n\n";
@@ -155,6 +192,10 @@ class RollDiceGame
     }
 
 
+    /**
+     * Get winner of game
+     * @return array
+     */
     public final function getWinner(): array
     {
         echo "Getting winner...\n";
@@ -177,8 +218,10 @@ class RollDiceGame
         return $winners;
     }
 
-    //get player has max score
-
+    /**
+     * Evaluate game
+     * @return void
+     */
     public final function evaluate(): void
     {
         echo "\n\n==================== Round {$this->round} ====================\n";
@@ -196,6 +239,10 @@ class RollDiceGame
         $this->round++;
     }
 
+    /**
+     * Evaluate scores
+     * @return void
+     */
     public final function evaluateScores(): void
     {
         $transferDice = [];
