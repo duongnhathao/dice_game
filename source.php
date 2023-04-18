@@ -110,9 +110,9 @@ class RollDiceGame
     public array $player_results = [];
     public int $number_of_dice_per_roll = 1;
     public bool $show_log = false;
-    public int $round_limit = 100;
+    public int|false $round_limit = false;
 
-    public function __construct(array $playerIds, int $number_of_dice_per_roll = 1, bool $show_log = false)
+    public function __construct(array $playerIds, int $number_of_dice_per_roll = 1, bool $show_log = false, int|false $round_limit = false)
     {
         echo "Game created...\n";
         $this->number_of_dice_per_roll = $number_of_dice_per_roll;
@@ -122,6 +122,7 @@ class RollDiceGame
             $this->players[] = new Player($this->number_of_dice_per_roll, $playerId);
         }
         $this->show_log = $show_log;
+        $this->round_limit = $round_limit;
     }
 
     /**
@@ -139,8 +140,8 @@ class RollDiceGame
         echo "First rolling dice for each player...\n";
         $this->evaluate();
         //do not let game play more than 100 times
-        $round = 0;
-        while (!$this->isGameOver() && $round < $this->round_limit) {
+        $round = 1;
+        while (!$this->isGameOver() && ($this->round_limit === false || $round < $this->round_limit)) {
             $this->evaluate();
             $round++;
         }
@@ -197,7 +198,7 @@ class RollDiceGame
     {
         echo "Getting winner...\n";
         //get element from players array and add to player result
-        $this->player_results[] = array_shift($this->players);
+        $this->player_results = [...$this->player_results, ...$this->players];
         $maxScore = 0;
         //get max score in player result
         foreach ($this->player_results as $player) {
@@ -354,5 +355,5 @@ class RollDiceGame
 
 //run the game
 //User Ids must be unique and greater than 0 for running the game correctly
-$game = new RollDiceGame([1, 2, 3], 10);
+$game = new RollDiceGame([1, 2, 3, 4], 3);
 $game->play();
