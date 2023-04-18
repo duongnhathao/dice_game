@@ -110,6 +110,7 @@ class RollDiceGame
     public array $player_results = [];
     public int $number_of_dice_per_roll = 1;
     public bool $show_log = false;
+    public int $round_limit = 100;
 
     public function __construct(array $playerIds, int $number_of_dice_per_roll = 1, bool $show_log = false)
     {
@@ -130,7 +131,7 @@ class RollDiceGame
     public final function play(): void
     {
         echo "Game started...\n";
-        //check game is over or not 
+        //check game is over or not
         if ($this->isGameOver()) {
             $this->showResult();
             return;
@@ -139,7 +140,7 @@ class RollDiceGame
         $this->evaluate();
         //do not let game play more than 100 times
         $round = 0;
-        while (!$this->isGameOver() && $round < 100) {
+        while (!$this->isGameOver() && $round < $this->round_limit) {
             $this->evaluate();
             $round++;
         }
