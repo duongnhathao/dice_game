@@ -352,6 +352,6 @@ class RollDiceGame
 
 
 //run the game
-//User Ids must be unique
+//User Ids must be unique and greater than 0 for running the game correctly
 $game = new RollDiceGame([1, 2, 3], 10);
 $game->play();
