@@ -4,9 +4,7 @@ class Player
 {
     public int $user_id;
     public int $number_of_dice_per_roll;
-
     public bool $first_roll = true;
-
     public int $score = 0;
     public array $last_roll = [];
     public array $roll_histories = [];
@@ -108,11 +106,9 @@ class Player
 class RollDiceGame
 {
     public array $players;
-
     public int $round = 1;
     public array $player_results = [];
     public int $number_of_dice_per_roll = 1;
-
     public bool $show_log = false;
 
     public function __construct(array $playerIds, int $number_of_dice_per_roll = 1, bool $show_log = false)
@@ -354,5 +350,8 @@ class RollDiceGame
 
 }
 
+
+//run the game
+//User Ids must be unique
 $game = new RollDiceGame([1, 2, 3], 10);
 $game->play();
