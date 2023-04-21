@@ -112,8 +112,12 @@ class RollDiceGame
     public bool $show_log = false;
     public int|false $round_limit = false;
 
-    public function __construct(array $playerIds, int $number_of_dice_per_roll = 1, bool $show_log = false, int|false $round_limit = false)
+    public function __construct(array|int $playerIds, int $number_of_dice_per_roll = 1, bool $show_log = false, int|false $round_limit = false)
     {
+        if (is_int($playerIds)) {
+            $playerIds = range(1, $playerIds);
+        }
+
         echo "Game created...\n";
         $this->number_of_dice_per_roll = $number_of_dice_per_roll;
 
@@ -352,7 +356,8 @@ class RollDiceGame
 
 }
 
+
 //run the game
-//User Ids must be unique and greater than 0 for running the game correctly
-$game = new RollDiceGame([1, 2, 3, 4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34], 30);
+//User Ids must be an int number or an array unique id and greater than 0 for running the game correctly
+$game = new RollDiceGame(10, 20);
 $game->play();

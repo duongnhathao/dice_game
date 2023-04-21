@@ -1,23 +1,22 @@
-II. Practice Questions:
 Write a dice game script that accepts N number of players and M number of players as input
 dice, with the following rules:
 1. At the start of the game, each player gets a dice of M units.
 2. All players will roll their respective dice at the same time
 3. Each player will check the results of their roll of the dice and evaluate as follows:
 
-	a. Dice number 6 will be removed from the game and added as points for the player.
-	
-	b. Dice number 1 will be awarded to the player sitting next to him.
-	
-	c. For example, the first player will give the dice the number 1 to the second player.
-	
-	d. Dice numbers 2,3,4 and 5 will still be played by the player.
-  
+   a. Dice number 6 will be removed from the game and added as points for the player.
+
+   b. Dice number 1 will be awarded to the player sitting next to him.
+
+   c. For example, the first player will give the dice the number 1 to the second player.
+
+   d. Dice numbers 2,3,4 and 5 will still be played by the player.
+
 4. After the evaluation, the player who still has the dice will repeat the 2nd step
-until only 1 player remains.
+   until only 1 player remains.
 5. Players who have no more dice are considered to have finished playing.
 6. The player who has the most points wins.
-Make this script using the language you are good at.
+   Make this script using the language you are good at.
 
 Example:
 
@@ -60,3 +59,11 @@ Example:
 	====================
 	Game ends because only player #2 has dice.
 	Game won by player #1 because it has more points than other players
+
+# How to run the script
+   Code running in php 8.1.9
+
+    1. Install php 8.1.9
+    2. Run the script in the terminal using the command "php source.php"
+
+![Alt text](run.png?raw=true "Run the code")
